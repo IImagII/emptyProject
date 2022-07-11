@@ -1,25 +1,12 @@
-function biuld(str) {
-   const res = {};
-   str = str.toLowerCase();
-   for (let char of str) {
-      res[char] = res[char] + 1 || 1;
+let array = ['apple', 'banana', 'peach', 'orange'];
+let total = array.reduce((acc, elem) => {
+   if (acc[elem]) {
+      acc[elem] += 1;
+   } else {
+      acc[elem] = 1;
    }
-   return res;
-}
 
-function anagram(resA, resB) {
-   const aBuild = biuld(resA);
-   const bBuild = biuld(resB);
-   if (Object.keys(aBuild).length !== Object.keys(bBuild).length) {
-      return false;
-   }
-   for (let char in aBuild) {
-      if (aBuild[char] !== bBuild[char]) {
-         return false;
-      }
-   }
-   return true;
-}
+   return acc;
+}, {});
 
-console.log(anagram('friend', 'Finder'));
-console.log(anagram('hello', 'bye'));
+console.log(total);
