@@ -1,16 +1,17 @@
-const meetups = [
-   { name: 'JavaScript', isActive: true, members: 100 },
-   { name: 'Angular', isActive: true, members: 900 },
-   { name: 'Java', isActive: false, members: 100 },
-   { name: 'React', isActive: true, members: 500 },
-];
+const arr = [[1, 2], [3, 2], [4, 6], [[3, 4]]];
 
-function memberOnActiv(meetups) {
-   return meetups
-      .filter((meetup) => meetup.isActive)
-      .reduce((acc, elem) => {
-         return acc + elem.members;
-      }, 0);
+let res = arr.flat(Infinity).reduce((acc, elem) => acc + elem);
+console.log(res);
+
+function flat(array) {
+   let res = [];
+   array.forEach((elem) => {
+      if (Array.isArray(elem)) {
+         res = res.concat(flat(elem));
+      } else {
+         res.push(elem);
+      }
+   });
+   return res;
 }
-
-console.log(memberOnActiv(meetups));
+console.log(flat(arr));
