@@ -1,17 +1,13 @@
-const arr = [[1, 2], [3, 2], [4, 6], [[3, 4]]];
-
-let res = arr.flat(Infinity).reduce((acc, elem) => acc + elem);
-console.log(res);
-
-function flat(array) {
-   let res = [];
-   array.forEach((elem) => {
-      if (Array.isArray(elem)) {
-         res = res.concat(flat(elem));
-      } else {
-         res.push(elem);
-      }
-   });
-   return res;
+const debounce = (fn, ms) => {
+   let timeout;
+   return function () {
+      const fnCall = () => fn.apply(this, arguments);
+      clearTimeout(timeout);
+      timeout = setTimeout(fnCall, ms);
+   };
+};
+function onChange(e) {
+   console.log(e.target.value);
 }
-console.log(flat(arr));
+onChange = debounce(onChange, 300);
+document.querySelector('input').addEventListener('keyup', onChange);
